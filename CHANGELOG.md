@@ -19,6 +19,16 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+## [2.1.0] - 2018-04-23
+
+## Added
+- Backpack\CRUD 3.4 constraint;
+- backpack_middleware() usage;
+
+## Removed
+- Backpack\CRUD 3.2 and 3.3 support;
+
+
 ## [2.0.31] - 2018-04-23
 
 ## Added
