@@ -19,7 +19,7 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
-## [2.0.31] - 2018-04-xx
+## [2.0.31] - 2018-04-23
 
 ## Added
 - German translation;
