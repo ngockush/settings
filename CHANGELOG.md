@@ -19,6 +19,15 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+## [2.0.31] - 2018-04-xx
+
+## Added
+- German translation;
+
+## Fixed
+- show active settings in AjaxDataTables;
+
+
 ## [2.0.30] - 2018-03-15
 
 ## Fixed
