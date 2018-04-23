@@ -15,30 +15,21 @@ An interface for the administrator to easily change application settings. Uses L
 
 ## Install
 
-1) In your terminal:
+In your terminal:
 
 ``` bash
+# install the package
 composer require backpack/settings
-```
 
-2) For Laravel <5.5 apps, add the service provider to your config/app.php file:
-```php
-Backpack\Settings\SettingsServiceProvider::class,
-```
-
-3) Run the migration and add some example settings:
-```bash
+# run the migration
 php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider"
 php artisan migrate
 
-## if you want to have some example entries in the database
+# [optional] add a menu item for it to the sidebar_content file
+php artisan backpack:base:add-sidebar-content "<li><a href='{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}'><i class='fa fa-cog'></i> <span>Settings</span></a></li>"
+
+# [optional] insert some example dummy data to the database
 php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeeder"
-```
-
-4) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
-
-```html
-<li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
 ```
 
 ## Usage
