@@ -16,6 +16,7 @@ class SettingCrudController extends CrudController
         $this->crud->setModel("Backpack\Settings\app\Models\Setting");
         $this->crud->setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
         $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/setting');
+        $this->crud->addClause('where', 'active', 1);
         $this->crud->denyAccess(['create', 'delete']);
         $this->crud->setColumns([
             [
@@ -50,8 +51,6 @@ class SettingCrudController extends CrudController
      */
     public function index()
     {
-        $this->crud->addClause('where', 'active', 1);
-
         return parent::index();
     }
 
