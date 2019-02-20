@@ -59,7 +59,7 @@ Settings are stored in the database in the "settings" table. Its columns are:
 
 There is no interface available to add new settings. They are added by the developer directly in the database, since the Backpack CRUD field configuration is a bit complicated. See the field types and their configuration code on https://laravel-backpack.readme.io/docs
 
-# Override existing configurations
+### Override existing configurations
 
 You can use this addon to make various Laravel configurations adjustable through the settings GUI, including Backpack settings themself.
 For example, you can override the Backpack `show_powered_by` or the `skin` setting in `/config/Backpack/base.php`.
