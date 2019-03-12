@@ -59,6 +59,78 @@ Settings are stored in the database in the "settings" table. Its columns are:
 
 There is no interface available to add new settings. They are added by the developer directly in the database, since the Backpack CRUD field configuration is a bit complicated. See the field types and their configuration code on https://laravel-backpack.readme.io/docs
 
+### Override existing configurations
+
+You can use this addon to make various Laravel configurations adjustable through the settings GUI, including Backpack settings themself.
+For example, you can override the Backpack `show_powered_by` or the `skin` setting in `/config/Backpack/base.php`.
+
+1. Create the setting entry in your settings database. You can add the settings manually, or via [Laravel seeders](https://laravel.com/docs/seeding). The values inserted into the database should be look similar to below:
+
+   For Backpack `show_powered_by` setting:
+
+   | Field | Value |
+   | --- | --- |
+   | key | show_powered_by |
+   | name | Showed Powered By |
+   | description | Whether to show the powered by Backpack on the bottom right corner or not. |
+   | value | 1 |
+   | field | {"name":"value","label":"Value","type":"checkbox"} |
+   | active | 1 |
+
+   For Backpack `Skin` setting:
+
+   | Field | Value |
+   | --- | --- |
+   | key | skin |
+   | name | Skin |
+   | description | Backpack admin panel skin settings. |
+   | value | skin-purple |
+   | field | {"name":"value","label":"Value","type":"select2_from_array","options":{"skin-black":"Black","skin-blue":"Blue",   "skin-purple":"Purple","skin-red":"Red","skin-yellow":"Yellow","skin-green":"Green","skin-blue-light":"Blue light",   "skin-black-light":"Black light","skin-purple-light":"Purple light","skin-green-light":"Green light","skin-red-light":"Red light",   "skin-yellow-light":"Yellow light"},"allows_null":false,"default":"skin-purple"} |
+   | active | 1 |
+
+2. Open up the `app/Providers/AppServiceProvider` file, and add the below lines:
+
+   ```diff
+   <?php
+   
+   namespace App\Providers;
+   
+   use Illuminate\Support\ServiceProvider;
+   
+   class AppServiceProvider extends ServiceProvider
+   {
+       /**
+        * Bootstrap any application services.
+        *
+        * @return void
+        */
+       public function boot()
+       {
+   +       $this->overrideConfigValues();
+       }
+   
+       /**
+        * Register any application services.
+        *
+        * @return void
+        */
+       public function register()
+       {
+           //
+       }
+   
+   +   protected function overrideConfigValues()
+   +   {
+   +       $config = [];
+   +       if (config('settings.skin'))
+   +           $config['backpack.base.skin'] = config('settings.skin');
+   +       if (config('settings.show_powered_by'))
+   +           $config['backpack.base.show_powered_by'] = config('settings.show_powered_by') == '1';
+   +       config($config);
+   +   }
+   }
+   ```
+
 ## Screenshots
 
 See http://laravelbackpack.com
