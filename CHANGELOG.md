@@ -19,6 +19,11 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+
+## [2.1.3] - 2019-03-12
+
+- added support for CRUD 3.6.x
+
 ## [2.1.2] - 2018-11-22
 
 - added support for CRUD 3.5.x
