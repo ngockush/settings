@@ -41,6 +41,8 @@ Add it to the menu or access it by its route: **application/admin/setting**
 Use it like you would any config value in a virtual settings.php file. Except the values are stored in the database and fetched on boot, instead of being stored in a file.
 
 ``` php
+Setting::get('contact_email')
+// or 
 Config::get('settings.contact_email')
 ```
 
