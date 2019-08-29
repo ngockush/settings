@@ -9,10 +9,14 @@ use Backpack\Settings\app\Http\Requests\SettingRequest as UpdateRequest;
 
 class SettingCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\SaveActions;
+
     public function setup()
     {
-        parent::setup();
-
         $this->crud->setModel("Backpack\Settings\app\Models\Setting");
         $this->crud->setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
         $this->crud->setRoute(backpack_url('setting'));
@@ -42,21 +46,9 @@ class SettingCrudController extends CrudController
         ]);
     }
 
-    /**
-     * Display all rows in the database for this entity.
-     * This overwrites the default CrudController behaviour:
-     * - instead of showing all entries, only show the "active" ones.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        return parent::index();
-    }
-
     public function store(StoreRequest $request)
     {
-        return parent::storeCrud();
+        return $this->storeEntry();
     }
 
     /**
@@ -85,6 +77,6 @@ class SettingCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
-        return parent::updateCrud();
+        return $this->updateEntry($request);
     }
 }
