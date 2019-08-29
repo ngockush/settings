@@ -11,7 +11,6 @@ class SettingCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\SaveActions;
 
     public function setup()
     {
@@ -63,7 +62,7 @@ class SettingCrudController extends CrudController
         $this->data['entry'] = $this->crud->getEntry($id);
         $this->crud->addField(json_decode($this->data['entry']->field, true)); // <---- this is where it's different
         $this->data['crud'] = $this->crud;
-        $this->data['saveAction'] = $this->getSaveAction();
+        $this->data['saveAction'] = $this->crud->getSaveAction();
         $this->data['fields'] = $this->crud->getUpdateFields($id);
         $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
 
