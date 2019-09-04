@@ -4,9 +4,9 @@ namespace Backpack\Settings\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION
+use Backpack\CRUD\CrudPanelFacade as CRUD;
 use Backpack\Settings\app\Http\Requests\SettingRequest as StoreRequest;
 use Backpack\Settings\app\Http\Requests\SettingRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanelFacade as CRUD;
 
 class SettingCrudController extends CrudController
 {
@@ -19,8 +19,7 @@ class SettingCrudController extends CrudController
         CRUD::setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
         CRUD::setRoute(backpack_url('setting'));
 
-
-        CRUD::operation('list', function() {
+        CRUD::operation('list', function () {
             // only show settings which are marked as active
             CRUD::addClause('where', 'active', 1);
 
@@ -41,7 +40,7 @@ class SettingCrudController extends CrudController
             ]);
         });
 
-        CRUD::operation('update', function() {
+        CRUD::operation('update', function () {
             CRUD::addField([
                 'name'       => 'name',
                 'label'      => trans('backpack::settings.name'),
