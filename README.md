@@ -26,7 +26,7 @@ php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider
 php artisan migrate
 
 # [optional] add a menu item for it to the sidebar_content file
-php artisan backpack:base:add-sidebar-content "<li><a href='{{ url(config('backpack.base.route_prefix', 'admin') . '/setting') }}'><i class='fa fa-cog'></i> <span>Settings</span></a></li>"
+php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('setting') }}'><i class='nav-icon fa fa-cog'></i> <span>Settings</span></a></li>"
 
 # [optional] insert some example dummy data to the database
 php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeeder"
