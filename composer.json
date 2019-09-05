@@ -22,6 +22,8 @@
             "role": "Chief Architect & Lead Developer"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "backpack/crud": "^4.0"
     },
