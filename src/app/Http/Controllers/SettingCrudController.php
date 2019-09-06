@@ -3,10 +3,7 @@
 namespace Backpack\Settings\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-// VALIDATION
-use Backpack\CRUD\CrudPanelFacade as CRUD;
-use Backpack\Settings\app\Http\Requests\SettingRequest as StoreRequest;
-use Backpack\Settings\app\Http\Requests\SettingRequest as UpdateRequest;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class SettingCrudController extends CrudController
 {
@@ -66,15 +63,5 @@ class SettingCrudController extends CrudController
         $this->crud->setOperationSetting('fields', $this->crud->getUpdateFields());
 
         return view($this->crud->getEditView(), $this->data);
-    }
-
-    public function store(StoreRequest $request)
-    {
-        return $this->storeEntry();
-    }
-
-    public function update(UpdateRequest $request)
-    {
-        return $this->updateEntry($request);
     }
 }

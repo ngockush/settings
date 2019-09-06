@@ -2,7 +2,7 @@
 
 namespace Backpack\Settings\app\Models;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Config;
 use Illuminate\Database\Eloquent\Model;
 
