@@ -52,19 +52,4 @@ class SettingCrudController extends CrudController
 
         CRUD::addField(json_decode(CRUD::getCurrentEntry()->field, true));
     }
-
-    public function edit()
-    {
-        $this->crud->hasAccessOrFail('update');
-
-        $this->data['entry'] = $this->crud->getCurrentEntry();
-        $this->data['crud'] = $this->crud;
-        $this->data['saveAction'] = $this->crud->getSaveAction();
-        $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
-        $this->data['id'] = $this->crud->getCurrentEntryId();
-
-        $this->crud->setOperationSetting('fields', $this->crud->getUpdateFields());
-
-        return view($this->crud->getEditView(), $this->data);
-    }
 }
