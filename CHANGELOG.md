@@ -4,6 +4,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 -----
 
+## [3.0.1] - 2019-12-19
+
+### Added
+- Farsi (Persian) language file;
+
+
 ## [3.0.0] - 2019-09-24
 
 ### Added
