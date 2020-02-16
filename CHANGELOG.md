@@ -5,6 +5,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 -----
 
 
+## [3.0.3] - 2020-02-16
+
+### Added
+- PHP 7.2, 7.3, 7.4 and 8.0 to TravisCI;
+
+
 ## [3.0.2] - 2020-01-14
 
 ### Added
