@@ -5,6 +5,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 -----
 
 
+## [3.0.4] - 2020-03-05
+
+### Fixed
+- upgraded PHPUnit to 9/7/4;
+
+
 ## [3.0.3] - 2020-02-16
 
 ### Added
