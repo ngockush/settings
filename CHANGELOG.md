@@ -4,6 +4,11 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 -----
 
+## [3.0.6] - 2020-04-13
+
+### Added
+- Serbian localization;
+
 
 ## [3.0.5] - 2020-03-05
 
