@@ -4,6 +4,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 -----
 
+## [3.0.7] - 2020-04-24
+
+### Added
+- support for Backpack 4.1;
+
+
 ## [3.0.6] - 2020-04-13
 
 ### Added

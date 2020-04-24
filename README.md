@@ -8,7 +8,7 @@
 [![Style CI](https://styleci.io/repos/53683729/shield)](https://styleci.io/repos/53683729)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An interface for the administrator to easily change application settings. Uses Laravel Backpack. Works on Laravel 5.2 to Laravel 6.
+An interface for the administrator to easily change application settings. Uses Laravel Backpack. Works on Laravel 5.2 to Laravel 7.
 
 > ### Security updates and breaking changes
 > Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
@@ -26,7 +26,7 @@ php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider
 php artisan migrate
 
 # [optional] add a menu item for it to the sidebar_content file
-php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('setting') }}'><i class='nav-icon fa fa-cog'></i> <span>Settings</span></a></li>"
+php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('setting') }}'><i class='nav-icon la la-cog'></i> <span>Settings</span></a></li>"
 
 # [optional] insert some example dummy data to the database
 php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeeder"
