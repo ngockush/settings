@@ -8,7 +8,7 @@
 [![Style CI](https://styleci.io/repos/53683729/shield)](https://styleci.io/repos/53683729)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An interface for the administrator to easily change application settings. Uses Laravel Backpack. Works on Laravel 5.2 to Laravel 7.
+An interface for the administrator to easily change application settings. Uses Laravel Backpack. Works on Laravel 5.2 to Laravel 8.
 
 > ### Security updates and breaking changes
 > Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
