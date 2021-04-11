@@ -10,7 +10,7 @@ class Setting extends Model
 {
     use CrudTrait;
 
-    protected $table = 'backpack_settings';
+    protected $table = config('backpack.settings.table_name', 'settings');
     protected $fillable = ['value'];
 
     /**
@@ -40,7 +40,7 @@ class Setting extends Model
      */
     public static function set($key, $value = null)
     {
-        $prefixed_key = 'backpack_settings.'.$key;
+        $prefixed_key = config('backpack.settings.table_name', 'settings').'.'.$key;
         $setting = new self();
         $entry = $setting->where('key', $key)->firstOrFail();
 
