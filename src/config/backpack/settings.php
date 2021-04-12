@@ -20,5 +20,5 @@ return [
     | Routing Name
     |
     */
-    'route_name' => 'setting'
+    'route_name' => 'setting',
 ];
