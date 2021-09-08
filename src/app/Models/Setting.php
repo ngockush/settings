@@ -16,7 +16,7 @@ class Setting extends Model
     {
         parent::__construct($attributes);
 
-        $this->table = config('backpack.settings.table_name', 'settings');
+        $this->table = config('backpack.settings.table_name');
     }
 
     /**
@@ -46,7 +46,7 @@ class Setting extends Model
      */
     public static function set($key, $value = null)
     {
-        $prefixed_key = config('backpack.settings.table_name', 'settings').'.'.$key;
+        $prefixed_key = config('backpack.settings.table_name').'.'.$key;
         $setting = new self();
         $entry = $setting->where('key', $key)->firstOrFail();
 
