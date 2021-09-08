@@ -13,9 +13,11 @@ An interface for the administrator to easily change application settings. Uses L
 > ### Security updates and breaking changes
 > Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
 
-## Install
+## Install 
 
-In your terminal:
+**Note:** The default table name is `settings`, if you need to change it please read the instruction bellow this general ones.
+
+For default setup, write in your terminal:
 
 ``` bash
 # install the package
@@ -36,11 +38,14 @@ php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeede
 
 You can configure the table name, the settings route and the config prefix in `config\backpack\settings.php` read more about it in the configuration file.
 
+**IMPORTANT** If you need to configure your table name, publish the configuration file first with `php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider" --tag="config"`
+
+Only **after changing the name** you should do the general publish command that will publish the migration with the desired table name. 
+```php
+php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider"
 ```
-    'table_name' => 'custom_settings_table',
-    'route_name' => 'custom-settings-route',
-    'config_prefix => 'custom-config-prefix',
-];
+
+Follow the rest of the configuration as in the default install.
 
 ```
 
