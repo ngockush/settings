@@ -47,7 +47,7 @@ class SettingsServiceProvider extends ServiceProvider
             $settings = Setting::all();
 
             $config_prefix = config('backpack.settings.config_prefix');
-            
+
             // bind all settings to the Laravel config, so you can call them like
             // Config::get('settings.contact_email')
             foreach ($settings as $key => $setting) {
