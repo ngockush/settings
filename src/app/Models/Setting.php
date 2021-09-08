@@ -46,7 +46,9 @@ class Setting extends Model
      */
     public static function set($key, $value = null)
     {
-        $prefixed_key = config('backpack.settings.table_name').'.'.$key;
+        $database_prefix = config('backpack.settings.database_prefix');
+
+        $prefixed_key = !empty($database_prefix) ? $database_prefix.'.'.$key : $key;
         $setting = new self();
         $entry = $setting->where('key', $key)->firstOrFail();
 

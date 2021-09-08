@@ -45,11 +45,14 @@ class SettingsServiceProvider extends ServiceProvider
         if (!\App::runningInConsole() && count(Schema::getColumnListing(config('backpack.settings.table_name')))) {
             // get all settings from the database
             $settings = Setting::all();
-
+            
+            $database_prefix = config('backpack.settings.database_prefix');
+            
             // bind all settings to the Laravel config, so you can call them like
             // Config::get('settings.contact_email')
             foreach ($settings as $key => $setting) {
-                Config::set('settings.'.$setting->key, $setting->value);
+                $prefixed_key = !empty($database_prefix) ? $database_prefix.'.'.$setting->key : $setting->key;
+                Config::set($prefixed_key, $setting->value);
             }
         }
         // publish the migrations and seeds
