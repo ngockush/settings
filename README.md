@@ -34,11 +34,12 @@ php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeede
 
 ### [OPTIONAL] Configuration
 
-You can configure the table name and the settings route in `config\backpack\settings.php`
+You can configure the table name, the settings route and the config prefix in `config\backpack\settings.php` read more about it in the configuration file.
 
 ```
     'table_name' => 'custom_settings_table',
     'route_name' => 'custom-settings-route',
+    'config_prefix => 'custom-config-prefix',
 ];
 
 ```
