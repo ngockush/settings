@@ -23,7 +23,11 @@ For default setup, write in your terminal:
 # install the package
 composer require backpack/settings
 
-# run the migration
+# [optional] if you need to change table name or migration name, please do it now before proceding
+php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider" --tag="config"
+# then change the values you need in in `config/backpack/settings.php`
+
+# publish & run the migration
 php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider"
 php artisan migrate
 
@@ -32,21 +36,6 @@ php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-lin
 
 # [optional] insert some example dummy data to the database
 php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeeder"
-```
-
-### [OPTIONAL] Configuration
-
-You can configure the table name, the settings route and the config prefix in `config\backpack\settings.php` read more about it in the configuration file.
-
-**IMPORTANT** If you need to configure your table name, publish the configuration file first with `php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider" --tag="config"`
-
-Only **after changing the name** you should do the general publish command that will publish the migration with the desired table name. 
-```php
-php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider"
-```
-
-Follow the rest of the configuration as in the default install.
-
 ```
 
 ## Usage

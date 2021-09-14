@@ -36,4 +36,15 @@ return [
     |
     */
     'config_prefix' => 'settings',
+
+/*
+    |--------------------------------------------------------------------------
+    | Migration file name
+    |--------------------------------------------------------------------------
+    |
+    | The file name for the settings migration file. It will be created in database_path('/migrations/%name_you_choose%.php)
+    | Note: .php extension is automatically added.
+    |
+    */
+    'migration_name' => 'create_settings_table',
 ];

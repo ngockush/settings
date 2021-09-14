@@ -57,7 +57,7 @@ class SettingsServiceProvider extends ServiceProvider
         }
         // publish the migrations and seeds
         $this->publishes([
-            __DIR__.'/database/migrations/create_settings_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_settings_table.php'),
+            __DIR__.'/database/migrations/create_settings_table.php.stub' => database_path('migrations/'.config('backpack.settings.migration_name').'.php'),
         ], 'migrations');
 
         // publish translation files
