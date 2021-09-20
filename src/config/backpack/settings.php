@@ -46,5 +46,5 @@ return [
     | Note: .php extension is automatically added.
     |
     */
-    'migration_name' => 'create_settings_table',
+    'migration_name' => '2015_08_04_131614_create_settings_table',
 ];
