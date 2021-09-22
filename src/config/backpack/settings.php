@@ -17,7 +17,7 @@ return [
     | Route
     |--------------------------------------------------------------------------
     |
-    | URL Segment aka route to the Settings panel.  
+    | URL Segment aka route to the Settings panel.
     |
     */
     'route' => 'setting',
