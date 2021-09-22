@@ -17,7 +17,7 @@ An interface for the administrator to easily change application settings. Uses L
 
 **Note:** The default table name is `settings`, if you need to change it please carefully read the comments in the instruction below.
 
-For default setup, write in your terminal:
+In your terminal:
 
 ``` bash
 # install the package
