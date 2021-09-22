@@ -13,7 +13,9 @@ An interface for the administrator to easily change application settings. Uses L
 > ### Security updates and breaking changes
 > Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
 
-## Install
+## Install 
+
+**Note:** The default table name is `settings`, if you need to change it please carefully read the comments in the instruction below.
 
 In your terminal:
 
@@ -21,7 +23,11 @@ In your terminal:
 # install the package
 composer require backpack/settings
 
-# run the migration
+# [optional] if you need to change table name or migration name, please do it now before proceding
+php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider" --tag="config"
+# then change the values you need in in `config/backpack/settings.php`
+
+# publish & run the migration
 php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider"
 php artisan migrate
 
