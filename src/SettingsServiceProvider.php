@@ -32,25 +32,39 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // use the vendor configuration file as fallback
+        $this->mergeConfigFrom(
+            __DIR__.'/config/backpack/settings.php',
+            'backpack.settings'
+        );
+
         // define the routes for the application
         $this->setupRoutes($this->app->router);
 
         // only use the Settings package if the Settings table is present in the database
-        if (!\App::runningInConsole() && Schema::hasTable('settings')) {
+        if (!\App::runningInConsole() && Schema::hasTable(config('backpack.settings.table_name'))) {
             // get all settings from the database
             $settings = Setting::all();
+
+            $config_prefix = config('backpack.settings.config_prefix');
 
             // bind all settings to the Laravel config, so you can call them like
             // Config::get('settings.contact_email')
             foreach ($settings as $key => $setting) {
-                Config::set('settings.'.$setting->key, $setting->value);
+                $prefixed_key = !empty($config_prefix) ? $config_prefix.'.'.$setting->key : $setting->key;
+                Config::set($prefixed_key, $setting->value);
             }
         }
         // publish the migrations and seeds
-        $this->publishes([__DIR__.'/database/migrations/' => database_path('migrations')], 'migrations');
+        $this->publishes([
+            __DIR__.'/database/migrations/create_settings_table.php.stub' => database_path('migrations/'.config('backpack.settings.migration_name').'.php'),
+        ], 'migrations');
 
         // publish translation files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
+
+        // publish setting files
+        $this->publishes([__DIR__.'/config' => config_path()], 'config');
     }
 
     /**
@@ -80,10 +94,6 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('settings', function ($app) {
-            return new Settings($app);
-        });
-
         // register their aliases
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Setting', \Backpack\Settings\app\Models\Setting::class);
