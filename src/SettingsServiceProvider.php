@@ -2,7 +2,7 @@
 
 namespace Backpack\Settings;
 
-use Backpack\Settings\app\Models\Setting as Setting;
+use Backpack\Settings\app\Models\Setting;
 use Config;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Schema;
