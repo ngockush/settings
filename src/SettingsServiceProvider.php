@@ -61,7 +61,7 @@ class SettingsServiceProvider extends ServiceProvider
         ], 'migrations');
 
         // publish translation files
-        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
+        $this->publishes([__DIR__.'/resources/lang' => app()->langPath().'/vendor/backpack'], 'lang');
 
         // publish setting files
         $this->publishes([__DIR__.'/config' => config_path()], 'config');
