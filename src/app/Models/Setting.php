@@ -13,7 +13,7 @@ class Setting extends Model implements Cacheable
     use CrudTrait;
     use HasCache;
 
-    protected $fillable = ['value'];
+    protected $guarded = [];
 
     public function __construct(array $attributes = [])
     {

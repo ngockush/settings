@@ -4,6 +4,8 @@ namespace Backpack\Settings\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\Settings\app\Models\Setting;
+use Illuminate\Support\Facades\Route;
 
 class SettingCrudController extends CrudController
 {
@@ -19,8 +21,20 @@ class SettingCrudController extends CrudController
 
     public function setupListOperation()
     {
-        // only show settings which are marked as active
         CRUD::addClause('where', 'active', 1);
+
+        $this->crud->addFilter(
+            [
+                'type'  => 'select',
+                'name'  => 'group',
+                'label' => 'Phân loại',
+            ],
+            Setting::pluck('group')->unique()->values()->toArray(),
+            function ($val) {
+                $this->crud->addClause('where', 'group', $val);
+                // $this->crud->query = $this->crud->query->where('draft', '1');
+            }
+        );
 
         // columns to show in the table view
         CRUD::setColumns([
@@ -33,8 +47,8 @@ class SettingCrudController extends CrudController
                 'label' => trans('backpack::settings.value'),
             ],
             [
-                'name'  => 'description',
-                'label' => trans('backpack::settings.description'),
+                'name'  => 'key',
+                'label' => trans('key'),
             ],
         ]);
     }
