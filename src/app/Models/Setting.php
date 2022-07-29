@@ -5,10 +5,13 @@ namespace Backpack\Settings\app\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Config;
 use Illuminate\Database\Eloquent\Model;
+use Hacoidev\CachingModel\Contracts\Cacheable;
+use Hacoidev\CachingModel\HasCache;
 
-class Setting extends Model
+class Setting extends Model implements Cacheable
 {
     use CrudTrait;
+    use HasCache;
 
     protected $fillable = ['value'];
 
@@ -17,6 +20,11 @@ class Setting extends Model
         parent::__construct($attributes);
 
         $this->table = config('backpack.settings.table_name');
+    }
+
+    public static function primaryCacheKey(): string
+    {
+        return 'key';
     }
 
     /**
@@ -28,14 +36,13 @@ class Setting extends Model
      */
     public static function get($key)
     {
-        $setting = new self();
-        $entry = $setting->where('key', $key)->first();
+        $setting = static::fromCache()->find($key);
 
-        if (!$entry) {
+        if (!$setting) {
             return;
         }
 
-        return $entry->value;
+        return $setting->value;
     }
 
     /**

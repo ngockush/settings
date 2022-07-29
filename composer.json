@@ -25,6 +25,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "hacoidev/laravel-caching-model": "^1.0",
         "hacoidev/crud": "dev-main"
     },
     "require-dev": {
