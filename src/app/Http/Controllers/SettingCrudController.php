@@ -29,7 +29,7 @@ class SettingCrudController extends CrudController
                 'name'  => 'group',
                 'label' => 'Phân loại',
             ],
-            Setting::pluck('group')->unique()->values()->toArray(),
+            Setting::where('active', true)->pluck('group')->unique()->values()->toArray(),
             function ($val) {
                 $this->crud->addClause('where', 'group', $val);
                 // $this->crud->query = $this->crud->query->where('draft', '1');
