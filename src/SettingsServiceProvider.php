@@ -38,6 +38,10 @@ class SettingsServiceProvider extends ServiceProvider
             'backpack.settings'
         );
 
+        foreach (glob(__DIR__ . '/Helper/*.php') as $filename) {
+            require_once $filename;
+        }
+
         // define the routes for the application
         $this->setupRoutes($this->app->router);
 
