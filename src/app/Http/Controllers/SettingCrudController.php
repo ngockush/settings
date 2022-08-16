@@ -52,6 +52,18 @@ class SettingCrudController extends CrudController
             'uses'      => $controller . '@updateKey',
             'operation' => 'updateKey',
         ]);
+
+        Route::get($segment . '/group/{group}/edit', [
+            'as'        => $routeName . '.editGroup',
+            'uses'      => $controller . '@editGroup',
+            'operation' => 'updateGroup',
+        ]);
+
+        Route::put($segment . '/group/{group}', [
+            'as'        => $routeName . '.updateGroup',
+            'uses'      => $controller . '@updateGroup',
+            'operation' => 'updateGroup',
+        ]);
     }
 
 
@@ -120,15 +132,13 @@ class SettingCrudController extends CrudController
             return back();
         }
 
-        $field = array_merge(json_decode($this->data['entry']['field'], true), ['label' => 'Value']);
+        $field = array_merge(json_decode($this->data['entry']['field'], true), ['label' => '']);
         $this->crud->setOperationSetting('fields', [$field]);
 
         $this->data['crud'] = $this->crud;
         $this->data['title'] = $this->crud->getTitle() ?? trans('backpack::crud.edit') . ' ' . $this->crud->entity_name;
-        $this->data['id'] = $key;
-        $this->data['reset_form'] = false;
 
-        return view('ophim::customizer', $this->data);
+        return view('settings::key', $this->data);
     }
 
     /**
@@ -136,29 +146,73 @@ class SettingCrudController extends CrudController
      *
      * @return array|\Illuminate\Http\RedirectResponse
      */
-    public function updatekey($key)
+    public function updatekey($id)
     {
         $this->crud->hasAccessOrFail('update');
 
-        // execute the FormRequest authorization and validation, if one is required
         $request = $this->crud->validateRequest();
 
-        // register any Model Events defined on fields
         $this->crud->registerFieldEvents();
 
-        // update the row in the db
-        $item = $this->crud->update(
-            ['key' => $key],
-            $this->crud->getStrippedSaveRequest($request)
-        );
-        $this->data['entry'] = $this->crud->entry = $item;
+        Setting::where('id', $id)->update([
+            'value' => $request->value
+        ]);
 
-        // show a success message
         Alert::success(trans('backpack::crud.update_success'))->flash();
 
-        // save the redirect choice for next time
-        $this->crud->setSaveAction();
+        return back();
+    }
 
-        return $this->crud->performSaveAction($item->getKey());
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function editGroup($group)
+    {
+        $this->crud->hasAccessOrFail('update');
+
+        $settings = Setting::where('group', $group)->get();
+
+        $fields = [];
+        foreach ($settings as $setting) {
+            $fields[] = array_merge(json_decode($setting->field, true), ['label' => $setting->name, 'name' => $setting->key, 'value' => $setting->value]);
+        }
+
+        $this->crud->setOperationSetting('fields', $fields);
+        $this->data['entry'] = $this->crud->getEntryWithLocale($setting->id);
+
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = $this->crud->getTitle() ?? trans('backpack::crud.edit') . ' ' . $this->crud->entity_name;
+        $this->crud->enableTabs();
+
+        return view('settings::group', $this->data);
+    }
+
+    /**
+     * Update the specified resource in the database.
+     *
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
+    public function updateGroup($group)
+    {
+        $this->crud->hasAccessOrFail('update');
+
+        $request = $this->crud->validateRequest();
+
+        $this->crud->registerFieldEvents();
+
+        $settings = Setting::where('group', $group)->get();
+
+        foreach ($settings as $setting) {
+            $setting->update([
+                'value' => $request[$setting->key]
+            ]);
+        }
+
+        Alert::success(trans('backpack::crud.update_success'))->flash();
+
+        return back();
     }
 }
