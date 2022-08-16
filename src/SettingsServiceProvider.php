@@ -70,7 +70,7 @@ class SettingsServiceProvider extends ServiceProvider
         // publish setting files
         $this->publishes([__DIR__.'/config' => config_path()], 'config');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'settings');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'settings');
     }
 
     /**
