@@ -32,16 +32,6 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // use the vendor configuration file as fallback
-        $this->mergeConfigFrom(
-            __DIR__.'/config/backpack/settings.php',
-            'backpack.settings'
-        );
-
-        foreach (glob(__DIR__ . '/Helper/*.php') as $filename) {
-            require_once $filename;
-        }
-
         // define the routes for the application
         $this->setupRoutes($this->app->router);
 
@@ -55,20 +45,20 @@ class SettingsServiceProvider extends ServiceProvider
             // bind all settings to the Laravel config, so you can call them like
             // Config::get('settings.contact_email')
             foreach ($settings as $key => $setting) {
-                $prefixed_key = !empty($config_prefix) ? $config_prefix.'.'.$setting->key : $setting->key;
+                $prefixed_key = !empty($config_prefix) ? $config_prefix . '.' . $setting->key : $setting->key;
                 Config::set($prefixed_key, $setting->value);
             }
         }
         // publish the migrations and seeds
         $this->publishes([
-            __DIR__.'/database/migrations/create_settings_table.php.stub' => database_path('migrations/'.config('backpack.settings.migration_name').'.php'),
+            __DIR__ . '/database/migrations/create_settings_table.php.stub' => database_path('migrations/' . config('backpack.settings.migration_name') . '.php'),
         ], 'migrations');
 
         // publish translation files
-        $this->publishes([__DIR__.'/resources/lang' => app()->langPath().'/vendor/backpack'], 'lang');
+        $this->publishes([__DIR__ . '/resources/lang' => app()->langPath() . '/vendor/backpack'], 'lang');
 
         // publish setting files
-        $this->publishes([__DIR__.'/config' => config_path()], 'config');
+        $this->publishes([__DIR__ . '/config' => config_path()], 'config');
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'settings');
     }
@@ -83,11 +73,11 @@ class SettingsServiceProvider extends ServiceProvider
     public function setupRoutes(Router $router)
     {
         // by default, use the routes file provided in vendor
-        $routeFilePathInUse = __DIR__.$this->routeFilePath;
+        $routeFilePathInUse = __DIR__ . $this->routeFilePath;
 
         // but if there's a file with the same name in routes/backpack, use that one
-        if (file_exists(base_path().$this->routeFilePath)) {
-            $routeFilePathInUse = base_path().$this->routeFilePath;
+        if (file_exists(base_path() . $this->routeFilePath)) {
+            $routeFilePathInUse = base_path() . $this->routeFilePath;
         }
 
         $this->loadRoutesFrom($routeFilePathInUse);
@@ -103,5 +93,15 @@ class SettingsServiceProvider extends ServiceProvider
         // register their aliases
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Setting', \Backpack\Settings\app\Models\Setting::class);
+
+        // use the vendor configuration file as fallback
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/backpack/settings.php',
+            'backpack.settings'
+        );
+
+        foreach (glob(__DIR__ . '/Helper/*.php') as $filename) {
+            require_once $filename;
+        }
     }
 }
