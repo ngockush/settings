@@ -1,5 +1,5 @@
 {
-    "name": "hacoidev/settings",
+    "name": "ngockush/settings",
     "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
     "keywords": [
         "tabacitu",
@@ -14,22 +14,20 @@
     ],
     "homepage": "https://github.com/laravel-backpack/settings",
     "license": "proprietary",
-    "authors": [
-        {
-            "name": "Cristian Tabacitu",
-            "email": "tabacitu@backpackforlaravel.com",
-            "homepage": "https://backpackforlaravel.com",
-            "role": "Chief Architect & Lead Developer"
-        }
-    ],
+    "authors": [{
+        "name": "Cristian Tabacitu",
+        "email": "tabacitu@backpackforlaravel.com",
+        "homepage": "https://backpackforlaravel.com",
+        "role": "Chief Architect & Lead Developer"
+    }],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "hacoidev/laravel-caching-model": "^1.0.0",
-        "hacoidev/crud": "^1.0.0"
+        "ngockush/laravel-caching-model": "^1.0.0",
+        "ngockush/crud": "^1.0.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : "^9.0||^7.0",
+        "phpunit/phpunit": "^9.0||^7.0",
         "scrutinizer/ocular": "~1.1"
     },
     "autoload": {
